@@ -73,9 +73,9 @@ doEvent.posthocLandR = function(sim, eventTime, eventType) {
       sim <- scheduleEvent(sim, start(sim), "posthocLandR", "createPlots")
     },
     createPlots = {
-      sim$allPlots <- future.apply::future_lapply(names(sim$resultsFolders), function(typeSim){  
+        sim$allPlots <- lapply(names(sim$resultsFolders), function(typeSim){  
         # [ FIX ] still need to make use of the overwrite! # 
-        sim$LeadingVegetationType[[typeSim]] <- plotLeadingVegetationType(
+          sim$LeadingVegetationType[[typeSim]] <- plotLeadingVegetationType(
           dataPath = sim$resultsFolders[[typeSim]], 
           typeSim = typeSim, 
           saveRAS = P(sim)$saveRAS,
@@ -83,7 +83,7 @@ doEvent.posthocLandR = function(sim, eventTime, eventType) {
           sppEquivCol = P(sim)$sppEquivCol,
           sppEquivalencies_CA = sim$sppEquivalencies_CA,
           sppColorVect = sim$sppColorVect)
-        
+ 
         sim$vegetationBiomassMap[[typeSim]] <- plotVegetationBiomass(
           dataPath = sim$resultsFolders[[typeSim]], 
           typeSim = typeSim,
